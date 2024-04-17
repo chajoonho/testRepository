@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+  </head>
+  <body>
+    <h2>회원가입</h2>
+    <fieldset>
+      <legend>필수 입력 사항</legend>
+      <form name="input" enctype="multipart/form-data"></form>
+      ID <input type="text" /> <button>중복 확인</button>
+      <br />
+      비밀번호 <input type="password" />
+      <br />
+      비밀번호 확인 <input type="password" />
+      <br />
+      Email <input type="email" required />
+      <select name="email">
+        <option value="email">직접입력</option>
+        <option value="email">@naver.com</option>
+        <option value="email">@daum.net</option>
+        <option value="email">@gmail.com</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>추가 정보</legend>
+      <p>프로필 사진<input type="file" /></p>
+      <p>
+        성별 :
+        <input type="radio" name="gender" id="male" value="male" />
+        <label for="male">남성</label>
+        <input type="radio" name="gender" id="female" value="female" />
+        <label for="female">여성</label>
+      </p>
+      <p>생년월일 : <input type="datetime-local" /></p>
+      <p>
+        취미 <br />
+        <input type="checkbox" /> <label for="checkbox">야구</label>
+        <input type="checkbox" /> <label for="checkbox">농구</label>
+        <input type="checkbox" /> <label for="checkbox">축구</label>
+        <br />
+        <input type="checkbox" /> <label for="checkbox">공부</label>
+        <input type="checkbox" /> <label for="checkbox">음악감상</label>
+        <br />
+        <input type="checkbox" />기타<label for="checkbox">
+          <input type="text" /><label for="text"></label>
+        </label>
+      </p>
+      자기소개 <br />
+      <textarea name="feedback" rows="8" cols="80"></textarea>
+    </fieldset>
+    <br />
+    <button>회원가입</button><button>다시입력</button><button>이전으로</button>
+  </body>
+</html>
