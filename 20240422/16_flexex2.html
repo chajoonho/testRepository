@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body > div {
+      display: flex;
+      justify-content: space-around;
+      border: 2px solid red;
+      border-radius: 10px;
+      align-items: center;
+      height: 700px;
+    }
+    body > div > div {
+      background-color: beige;
+      border: 2px solid teal;
+      border-radius: 5px;
+      padding: 20px;
+
+      text-align: center;
+      flex-grow: 1;
+    }
+    div:nth-child(1) {
+      align-self: flex-start;
+    }
+    div:nth-child(3) {
+      align-self: flex-end;
+    }
+  </style>
+  <body>
+    <h1>1번</h1>
+    <div>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+    </div>
+  </body>
+</html>
