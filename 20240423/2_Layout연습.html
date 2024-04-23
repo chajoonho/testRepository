@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    /* #flex-container  */
+    #container {
+      display: flex;
+      border: 5px solid blue;
+      flex-direction: column;
+      border-radius: 10px;
+
+      height: 800px;
+    }
+    #header {
+      background-color: yellow;
+      flex-grow: 1;
+      border-radius: 30px;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+      display: flex;
+    }
+    #main {
+      /* background-color: aqua; */
+      flex-grow: 1;
+      display: flex;
+    }
+    #nav {
+      background-color: #e69999;
+      flex-grow: 2;
+      border-radius: 30px;
+      margin: 5px;
+      text-align: center;
+    }
+    #content {
+      background-color: #99e6e6;
+      flex-grow: 5;
+      border-radius: 30px;
+      margin: 5px;
+      /* border: 1px dotted gray;
+      text-align: center; */
+
+      text-align: left;
+    }
+
+    #footer {
+      background-color: #9999e6;
+      flex-grow: 0.5;
+      border-radius: 20px;
+      margin: 5px;
+      text-align: center;
+      align-items: center;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+  <body>
+    <h1>Layout</h1>
+    <div id="container">
+      <div id="header">
+        <h1>My Blog Page</h1>
+        <br />
+        <h3></h3>
+      </div>
+
+      <div id="main">
+        <div id="nav">
+          <h3>Links</h3>
+          <li>w3schools</li>
+          <li>Naver</li>
+          <li>Daum</li>
+          <img src="../resources/img/스폰지밥.webp" />
+
+          <h5>스폰지밥</h5>
+        </div>
+        <div id="content">
+          <div id="border">
+            <strong>Semantic Tags</strong> <br />시멘틱 요소(Semantic
+            elements)들은 브라우저에게 요소의 의미나 목적을 명확하게 알려주는
+            요소이다.레이아웃을 만들때 쓰는 것.의미가 있는 요소라면 div보다는
+            시멘틱 태그를 사용해준다
+          </div>
+        </div>
+      </div>
+
+      <div id="footer">Copyright (c)2019 Hong</div>
+    </div>
+  </body>
+</html>

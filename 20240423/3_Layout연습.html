@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+    }
+    #wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    #one {
+      background-color: yellow;
+      /* flex-grow: 1; */
+      display: flex;
+      /* flex-direction: column; */
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    #three {
+      /* background-color: aqua; */
+      background-color: #f3d9fa;
+      flex-grow: 1;
+      display: flex;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      /* width: 1000px; */
+    }
+    #two {
+      background-color: #da77f2;
+      /* flex-grow: 1; */
+      display: flex;
+      border-radius: 50px;
+      /* flex-direction: column; */
+
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      /* padding: 0.5%; */
+    }
+    #five {
+      background-color: #9258a1;
+
+      flex-grow: 1;
+      display: flex;
+      width: 20%;
+      /* flex-direction: column;
+      justify-content: space-evenly; */
+      /* margin-left: 10%;
+      margin-right: 10%; */
+    }
+    #four {
+      background-color: #ffa8a8;
+      width: 60%;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    a:link {
+      color: yellow;
+    }
+    a:visited {
+      color: white;
+    }
+    a:hover {
+      color: blue;
+    }
+    #footer {
+      background-color: rgb(125, 157, 226);
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1em;
+      border-radius: 50px;
+    }
+  </style>
+  <body>
+    <h1>main.html</h1>
+
+    <div id="wrapper">
+      <div id="one">
+        <img src="../resources/img/컴퓨터.jpg" width="50px" />
+        <h3>Web Shopping</h3>
+      </div>
+      <div id="two">
+        <a href="#">HOME</a>
+        <a href="#">SHOPPING</a>
+        <a href="#">ABOUT</a>
+        <a href="#">NEWS</a>
+        <a href="#">MY ACCOUNT</a>
+        <a href="#">CONTACTS</a>
+      </div>
+      <div id="three">
+        <p>카테고리</p>
+        <div id="four">
+          <ul>
+            <li><a href="#">컴퓨터</a></li>
+            <li><a href="#">의류</a></li>
+            <li><a href="#">음악</a></li>
+            <li><a href="#">영화</a></li>
+            <li><a href="#">스포츠/레저</a></li>
+            <li><a href="#">가구/인테리어</a></li>
+            <li><a href="#">식품</a></li>
+          </ul>
+          <img src="../resources/img/컴퓨터1.jpg" width="100px" />
+          <img src="../resources/img/컴퓨터2.jpg" width="100px" />
+          <img src="../resources/img/컴퓨터3.jpg" width="100px" />
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <div id="footer">
+      <p>2019..08.23 DW아케데미 042-123-4567</p>
+    </div>
+  </body>
+</html>
