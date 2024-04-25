@@ -11,6 +11,9 @@
   </head>
   <style>
     * {
+      box-sizing: border-box;
+    }
+    body {
       margin: 0;
     }
     html,
@@ -19,19 +22,20 @@
       width: 100%;
       height: 100%;
       background-color: #1f2029;
-      /* color: #c4c3ca; */
     }
     #wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
+      color: #c4c3ca;
     }
     #main {
       width: 500px;
       height: 500px;
-      background-color: #fafafa;
+      /* background-color: #fafafa; */
       display: flex;
       flex-direction: column;
+      background-color: #2a2b38;
     }
     h3 {
       margin: 50px;
@@ -51,8 +55,17 @@
     }
     #input-section input:not([type="submit"]) {
       width: 100%;
-
       padding: 2% 6%;
+      font-weight: 500;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      border: none;
+      background-color: #1f2029;
+      color: #c4c3ca;
+    }
+    #input-section input:not([type="submit"]):focus {
+      border: none;
+      outline: none;
     }
     #input-section > div {
       margin-top: 2%;
@@ -61,8 +74,13 @@
       margin-top: 2%;
       width: 100px;
       height: 30px;
-      background-color: yellow;
-      border-radius: 10px;
+      background-color: #ffeba7;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border: none;
+      color: #102770;
     }
     .icon {
       width: 8px;
@@ -70,10 +88,21 @@
       position: absolute;
       top: 25%;
       left: 5px;
+      color: #ffeba7;
     }
 
     #forgetPassword {
       height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #forgetPassword > a {
+      color: #c4c3ca;
+      text-decoration: none;
+    }
+    #forgetPassword > a:hover {
+      color: #ffeba7;
     }
   </style>
   <body>

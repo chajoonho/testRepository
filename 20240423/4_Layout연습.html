@@ -17,11 +17,27 @@
     body {
       margin: 0;
     }
+    #wrapper {
+      display: flex;
+      flex-direction: column;
+      /* width: ; */
+      height: 100%;
+    }
+    #header {
+      background-color: rgba(201, 166, 13, 0.568);
+      border-radius: 50px;
+    }
   </style>
   <body>
     <p>main.html</p>
-    <div>
-      <div></div>
+    <div id="wrapper">
+      <div id="header">
+        <img src="../resources/img/컴퓨터.jpg" width="50px" />
+        <p>Web Shopping</p>
+      </div>
+    </div>
+    <div id="main">
+      <div id="nav"></div>
       <div></div>
     </div>
   </body>

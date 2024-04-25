@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연습</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      border: none;
+
+      height: 100%;
+      display: grid;
+      grid-template-columns: 0.5fr 3fr;
+      grid-template-rows: 1fr 3fr 1fr;
+      grid-template-areas:
+        "header header "
+        "nav clear"
+        "footer footer ";
+    }
+    /* .div {
+      flex-grow: 1;
+      border-radius: 30px;
+      margin: 1px;
+      text-align: center;
+    } */
+    .header {
+      background-color: yellow;
+      display: grid;
+      margin-bottom: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #nav {
+      background-color: pink;
+      margin-right: 10px;
+      /* justify-content: center; */
+      /* display: flex; */
+      /* flex-grow: 2; */
+      /* border-radius: 30px; */
+      /* margin: 5px; */
+
+      text-align: center;
+    }
+    .clear {
+      background-color: skyblue;
+    }
+    .footer {
+      background-color: purple;
+      margin-top: 10px;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    }
+    li:nth-child(1) {
+      grid-area: header;
+    }
+    div:nth-child(2) {
+      grid-area: nav;
+    }
+    li:nth-child(3) {
+      grid-area: clear;
+    }
+    li:nth-child(4) {
+      grid-area: footer;
+    }
+    div > li {
+      list-style-type: none;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+  <body>
+    <ul class="container">
+      <li class="header"><h1>My Blog Page</h1></li>
+      <div id="nav">
+        <h3>Links</h3>
+        <li>w3schools</li>
+        <li>Naver</li>
+        <li>Daum</li>
+        <img src="../resources/img/스폰지밥.webp" />
+
+        <h5>스폰지밥</h5>
+      </div>
+
+      <li class="clear">
+        <h3>Semantic Tags</h3>
+        <br />시멘틱 요소(Semantic elements)들은 브라우저에게 요소의 의미나
+        목적을 명확하게 알려주는 요소이다.레이아웃을 만들때 쓰는 것.의미가 있는
+        요소라면 div보다는 시멘틱 태그를 사용해준다
+      </li>
+      <li class="footer">Copyright (c)2019 Hong</li>
+    </ul>
+  </body>
+</html>
