@@ -74,7 +74,7 @@
       background-color: #4ec0e9;
     }
     .clickMe {
-      animation: clickMe 4s infinite;
+      animation: clickMe 1s infinite;
     }
     @keyframes clickMe {
       5%,
@@ -94,7 +94,7 @@
         transform: scale(1.15) rotate(5deg);
       }
       30% {
-        transform: scale(1.15 rotate-3deg);
+        transform: scale(1.15) rotate(3deg);
       }
       35% {
         transform: scale(1.15) rotate(2deg);
@@ -111,17 +111,53 @@
 
     } */
     .gradient {
-      background-color: #e0e5ec;
+      /* background-color: #e0e5ec; */
+      /* background-color: transparent; 배경투명화 */
       position: relative;
+      overflow: hidden;
+      box-shadow: 2px 2px 2px 0px rgba(255, 255, 255, 0.5) inset,
+        7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
     }
     .gradient::after {
       content: "";
       position: absolute;
+      z-index: -1;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
       background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .gradient:hover:after {
+      transform: scale(2) rotate(180deg);
+    }
+
+    .openBtn {
+      border: 2px solid #4dbde5;
+      color: #4dbde5;
+      position: relative;
+      /* transition: 0.3s; */
+    }
+    .openBtn::before {
+      content: "";
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #4dbde5;
+      transform: scaleX(0);
+      transition: 0.3s;
+      z-index: -1;
+    }
+    .openBtn:hover {
+      color: white;
+    }
+    .openBtn:hover::before {
+      transform: scaleX(1);
     }
   </style>
   <body>
@@ -145,6 +181,10 @@
       <div class="content">
         <h2>gradient button</h2>
         <a href="#" class="gradient purpleblue">Gradient</a>
+      </div>
+      <div class="content">
+        <h2>open button</h2>
+        <a href="#" class="openBtn">Open</a>
       </div>
     </div>
   </body>
