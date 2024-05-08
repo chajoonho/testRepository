@@ -16,7 +16,7 @@
       for (let i = 2; i <= 20; i = i + 2) {
         document.write(`<h1>${i}</h1>`);
       }
-
+      document.write(`<hr>`);
       // 별찍기
       // *****
       // *****
@@ -24,25 +24,152 @@
       // *****
       // *****
 
-      //   for (let i = 1; i <= 5; i++) {
-      //     for (let j = 1; j <= 5; j++) {
-      //       document.write(`*`);
-      //     }
-      //     document.write(`<br> `);
-      //   }
-
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= 5; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br> `);
+      }
+      document.write(`<hr>`);
       // *
       // **
       // ***
       // ****
       // *****
-      let x = 1;
+
       for (let i = 1; i <= 5; i++) {
-        for (let j = 2; j <= x + 1; j) {
+        for (let j = 1; j <= i; j++) {
           document.write(`*`);
         }
         document.write(`<br>`);
       }
+      document.write(`<hr>`);
+      //     *
+      //    **
+      //   ***
+      //  ****
+      // *****
+      //&nbsp; 활용
+      for (let i = 1; i <= 5; i++) {
+        //공백  4 3 2 1 0
+        //   i       k
+        //   1     4 3 2 1
+        //   2      4 3 2
+        //   3       4 3
+        //   4        4
+        //   5      false
+        for (let k = 4; k >= i; k--) {
+          document.write(`&nbsp;`);
+        }
+        for (let j = 1; j <= i; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+      document.write(`<hr>`);
+      // *****
+      // ****
+      // ***
+      // **
+      // *
+
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 5; j >= i; j--) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+      document.write(`<hr>`);
+      // *****
+      //  ****
+      //   ***
+      //    **
+      //     *
+      for (let i = 1; i <= 5; i++) {
+        for (let k = 1; k <= i - 1; k++) {
+          document.write(`&nbsp;`);
+        }
+        for (let j = 5; j >= i; j--) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      document.write(`<hr>`);
+
+      // 1부터 사용자가 입력한 숫자까지의 합을 더해서 화면에 출력하세요.
+      // 1. 사용자에게 값(숫자)을 입력 받는다.
+      // 2. 반복문을 사용하여 1부터 사용자가 입력한 숫자까지의 합을 구하시오.
+      // 3. 계산된 합을 화면에 출력한다
+      // let grade = +prompt("숫자를 입력해주세요.");
+      // let sum = 0;
+
+      // let i = 0;
+      // while (i <= grade) {
+      //   sum += i;
+      //   i++;
+      // }
+      // document.write(`<h1>지정한 숫자 : ${grade}, 총 합 : ${sum}</h1>`);
+      // document.write(`<hr>`);
+
+      //     *
+      //    ***
+      //   *****
+      //  *******
+      // *********
+      // 4 3 2 1 0
+      // 1번째 방법
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 4; j >= i; j--) {
+          document.write(`&nbsp;`);
+        }
+        for (let k = 1; k <= 2 * i - 1; k++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+      document.write(`<hr>`);
+      // 2번째 방법
+      for (let i = 1; i <= 5; i++) {
+        for (let k = 4; k >= i; k--) {
+          document.write(`&nbsp;`);
+        }
+        for (let j = 1; j <= i; j++) {
+          document.write(`*`);
+        }
+        for (let l = 1; l < i; l++) document.write(`*`);
+        document.write(`<br>`);
+      }
+      document.write(`<hr>`);
+      // *********
+      //  *******
+      //   *****
+      //    ***
+      //     *
+      // 9 7 5 3 1
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= i - 1; j++) {
+          document.write(`&nbsp;`);
+        }
+        for (let k = 1; k <= 11 - i * 2; k++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+      document.write(`<hr>`);
+      //     *
+      //    ***
+      //   *****
+      //  *******
+      // *********
+      //  *******
+      //   *****
+      //    ***
+      //     *
+      // 4 3 2 1 0 1 2 3 4
+      // for (let i = 1; i <= 9; i++) {
+      //   for (let j = 1; j <= ; j++)
+      // }
     </script>
   </body>
 </html>
