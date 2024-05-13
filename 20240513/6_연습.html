@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연습</title>
+  </head>
+  <style>
+    div {
+      border: 2px solid red;
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+  <body>
+    <div id="num">
+      <span></span>
+    </div>
+    <button onclick="text()">텍스트입력</button>
+    <button onclick="chgcolor()">배경색상변경</button>
+    <button onclick="chgfont()">폰트색상변경</button>
+  </body>
+  <script>
+    // 텍스트입력
+    function text() {
+      const text = prompt("텍스트를 입력해주세요.");
+      const div1 = document.querySelector("#num");
+      div1.innerHTML = text;
+    }
+    // 배경색상변경
+    function chgcolor() {
+      const bkcolor = prompt("변경할 배경 색상을 입력하세요");
+      const div1 = document.querySelector("#num");
+      div1.style.backgroundColor = bkcolor;
+    }
+    // 변경할 폰트 색상
+    function chgfont() {
+      const fontcolr = prompt("변경할 폰트 색상을 입력하세요.");
+      const div1 = document.querySelector("#num");
+      div1.style.color = fontcolor;
+    }
+  </script>
+</html>

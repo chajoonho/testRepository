@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>랜덤 색상 변경</title>
+  </head>
+  <style>
+    div {
+      width: 300px;
+      height: 200px;
+      border: 2px solid red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <div>랜덤</div>
+    <br />
+    <button onclick="chgBkColor()">색상변경</button>
+  </body>
+  <script>
+    function chgBkColor() {
+      // parseInt 정수로 만들기 소수점 날리기
+      const colorArr = [];
+      for (let i = 0; i < 3; i++) {
+        const randNum = parseInt(Math.random() * 256);
+        colorArr.push(randNum);
+      }
+      const divEl = document.querySelector("div");
+      divEl.style.backgroundColor = `rgb(${colorArr.toString()})`;
+    }
+  </script>
+</html>
