@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이미지변경</title>
+  </head>
+  <body>
+    <img
+      id="image"
+      src="../resources/img/강아지.png"
+      width="500"
+      height="auto"
+      alt="random Image"
+    />
+    <br />
+    <button onclick="changeImage()">눌러보세요</button>
+  </body>
+  <script>
+    let lastIdx = 0;
+    function changeImage() {
+      //   // 사진 5장 정도를 준비
+      //   // 사진의 경로를 배열에 담는다.
+      const imgArr = [
+        "캐릭터1.jpg",
+        "캐릭터2.png",
+        "캐릭터3.webp",
+        "캐릭터4.png",
+        "캐릭터5.png",
+      ];
+      //   // 클릭할 때마다 0 ~ 4 의 랜덤 숫자를 뽑는다.
+      const num = makeRandNum(imgArr.length);
+      document.querySelector("#image").src = `../resources/img/${imgArr[num]}`;
+      //   document.querySelector("#image").src = "../resources/img/캐릭터2.png";
+      //   //   document.querySelector("#image").src = "../resources/img/고양이.png";
+    }
+
+    function makeRandNum(length) {
+      while (true) {
+        const randNum = parseInt(Math.random() * length);
+        if (randNum !== lastIdx) {
+          lastIdx = randNum;
+          return randNum;
+        }
+      }
+    }
+  </script>
+</html>
