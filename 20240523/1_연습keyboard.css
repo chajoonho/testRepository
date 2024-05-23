@@ -1,0 +1,64 @@
+.events {
+  /* border: 1px solid #333333; */
+  margin: 10px 0;
+  border: 1px solid #333333;
+  border-left: 0;
+  /* border-radius: 5px; */
+  display: flex;
+  width: 300px;
+  height: 45px;
+  justify-content: space-around;
+}
+
+.event {
+  border: 1px solid #333333;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 50%;
+  /* height: 40px; */
+}
+
+.row {
+  /* border: 1px solid #333333; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.function-keys {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 700px;
+}
+
+.key {
+  border: 1px solid #333333;
+  border-radius: 5px;
+  /* padding: 5px; */
+  margin: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+#Tab {
+  width: 70px;
+}
+#Backspace {
+  width: 100px;
+}
+
+#CapsLock,
+#Enter {
+  width: 90px;
+}
+#ShiftLeft,
+#ShiftRight {
+  width: 110px;
+}

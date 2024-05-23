@@ -45,5 +45,35 @@
     const chatBox = document.querySelector("#chat-box");
     const input = document.querySelector("#input");
     const send = document.querySelector("#sendBtn");
+
+    function sendMyText() {
+      const newMessage = input.value;
+      if (newMessage.length == 0) {
+        return false;
+      }
+      let changeMessage = newMessage.replaceAll("", "&nbsp;");
+      changeMessage = changeMessage.replaceAll("\n", "<br />");
+
+      const div = document.createElement("div");
+
+      div.innerHTML = changeMessage;
+
+      div.classList.add("bubble", "my-bubble");
+
+      chatBox.append(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      input.value = "";
+    }
+
+    function sendMyTextByEnter(e) {
+      console.log(e);
+      if (e.key == "Enter" && !e.shiftKey) {
+        sendMyText();
+        e.preventDefault();
+      }
+    }
+
+    input.addEventListener("keypress", sendMyTextByEnter);
   </script>
 </html>

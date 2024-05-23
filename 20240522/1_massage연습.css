@@ -19,12 +19,12 @@ body {
   left: 0;
   z-index: -1;
 }
-/* 
+
 .btn {
   border: none;
   background-color: transparent;
   cursor: pointer;
-} */
+}
 
 .container {
   width: 340px;
@@ -37,6 +37,7 @@ body {
 .header {
   display: flex;
   height: 60px;
+  padding: 12px 5px 8px;
 }
 
 .info-block {
@@ -51,7 +52,14 @@ body {
 
 .status {
   font-size: 12px;
-  padding: 0;
+  margin: 0;
+  color: gray;
+}
+
+.call-box {
+  display: flex;
+  width: 60px;
+  justify-content: space-between;
 }
 
 #chat-box {
@@ -77,10 +85,10 @@ body {
 }
 
 .my-bubble {
-  background-color: aqua;
+  background-color: #dbb5ee;
   color: #8f00fe;
-  border: 7px 15px;
-  border-radius: 14px 14px 14px 0px;
+  padding: 7px 15px;
+  border-radius: 14px 14px 0px 14px;
   align-self: flex-end;
 }
 

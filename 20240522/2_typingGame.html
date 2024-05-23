@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,11 +45,21 @@
       font-weight: 500;
       position: absolute;
     }
+    .score {
+      color: #ffffff;
+      font-size: 40px;
+      font-weight: 600;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 15px;
+    }
   </style>
   <body>
     <div id="container">
       <input id="input" type="text" placeholder="단어를 입력하세요." />
     </div>
+    <div class="score">총점 : 0</div>
   </body>
   <script>
     const words = [
@@ -62,7 +72,9 @@
       "Event",
     ];
     const input = document.querySelector("#input");
+    const scorePanel = document.querySelector(".score");
     let count = 0;
+    let score = 0;
 
     // 단어들이 뿌려질 container의 범위를 파악한다.
     const container = document.querySelector("#container");
@@ -95,11 +107,14 @@
         container.append(span);
       });
     }
+
     // 사용자가 입력한 텍스트와 동일한 id를 가진 span 태그를 제거한다.
     input.addEventListener("change", function () {
       const word = document.querySelector(`span[id=${input.value}]`);
       if (word != null) {
         word.remove();
+        score = score + 100;
+        scorePanel.innerHTML = `총점 : ${score}`;
         count++;
 
         // 게임 클리어
@@ -111,12 +126,32 @@
         }
       }
       input.value = "";
-
-      // 배열
     });
+
     // 단어들을 내려오게하는 부분
-    function wordRain() {}
+    function wordRain() {
+      // HTMLCollection과 NodeList 는 모두 유사배열이지만
+      // HTMLCollection 은 배열 함수를 사용할 수 없다.
+      const words = document.querySelectorAll(".word");
+      // getBoundingClientRect : 최종 렌더링된 크기 반환(현재 뷰포트에서의 요소의 상대적인 위치)
+      // offset-, client-, scroll- : 레이아웃 크기를 반환
+      console.log(container.getBoundingClientRect().bottom - 45);
+      setInterval(function () {
+        words.forEach(function (el) {
+          const rectSize = el.getBoundingClientRect();
+          el.style.top = `${rectSize.top - 75}px`;
+          if (
+            el.getBoundingClientRect().bottom >
+            container.getBoundingClientRect().bottom -
+              parseInt(getComputedStyle(input).height.split("px")[0])
+          ) {
+            el.remove();
+          }
+        });
+      }, 1000);
+    }
 
     init();
+    wordRain();
   </script>
 </html>
