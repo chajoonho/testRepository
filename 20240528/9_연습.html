@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>연습</title>
+    <script src="../resources/js/jquery-3.6.4.js"></script>
+  </head>
+  <style>
+    .wrapper {
+      width: 500px;
+    }
+    .wrapper * {
+      display: block;
+      border: 2px solid skyblue;
+      color: blue;
+      padding: 5px;
+      margin: 15px;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <ul>
+        ul
+        <li class="start">li class="start"</li>
+        <li class="my">li class="my"</li>
+        <li>li</li>
+        <li class="my">li class="my"</li>
+        <li class="stop">li class="stop"</li>
+        <li>li</li>
+        <li>li</li>
+        <li>li</li>
+      </ul>
+      body div
+      <div>
+        div
+        <ul>
+          ul
+          <li>
+            li
+            <span id="span1">span</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        div
+        <ul>
+          ul
+          <li>
+            li
+            <span id="span2">span</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    $("li:start").add(".my").css({
+      border: "2px solid red",
+      color: "purple",
+    });
+    $("#span1").first().css({
+      border: "2px solid red",
+      color: "purple",
+    });
+    $("#span2").parentsUntil(".wrapper > div").css({
+      border: "2px solid red",
+      color: "purple",
+    });
+  </script>
+</html>
