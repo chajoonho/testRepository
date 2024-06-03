@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈페이지 예시</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      #header {
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+      }
+      #main-content {
+        padding: 1rem;
+      }
+      .section {
+        margin-bottom: 2rem;
+      }
+      .section h2 {
+        border-bottom: 2px solid #4caf50;
+        padding-bottom: 0.5rem;
+      }
+      .card {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      #footer {
+        background-color: #f1f1f1;
+        text-align: center;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1>홈페이지 제목</h1>
+    </div>
+
+    <div id="main-content">
+      <section class="section" id="about">
+        <h2>소개</h2>
+        <p>이것은 소개 섹션입니다. 여기에 소개 내용을 작성하세요.</p>
+      </section>
+
+      <section class="section" id="services">
+        <h2>서비스</h2>
+        <div class="card">
+          <div class="card-title">서비스 1</div>
+          <p>서비스 1의 설명입니다.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">서비스 2</div>
+          <p>서비스 2의 설명입니다.</p>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <h2>연락처</h2>
+        <p>이메일: example@example.com</p>
+        <p>전화번호: 010-1234-5678</p>
+        <button onclick="showAlert()">문의하기</button>
+      </section>
+    </div>
+
+    <div id="footer">&copy; 2024 My Website</div>
+
+    <script>
+      function showAlert() {
+        alert("문의하기 버튼이 클릭되었습니다!");
+      }
+    </script>
+  </body>
+</html>
