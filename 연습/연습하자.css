@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(212, 189, 233);
+}
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu {
+  font-size: 24px;
+}
+.bar {
+  color: blueviolet;
+  display: flex;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+}
