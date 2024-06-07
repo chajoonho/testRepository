@@ -1,0 +1,8 @@
+body {
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+}
+.menu-items {
+  list-style-type: none;
+}
