@@ -1,4 +1,3 @@
-import React from "react";
 import HandIcon from "./HandIcon";
 import "./HandButton.css";
 function HandButton({ value, onClick }) {

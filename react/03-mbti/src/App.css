@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+.container {
+  width: 450px;
+  margin: 60px auto;
+}
+.section {
+  margin: 56px auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f7fb;
+  padding: 18px;
+  border-radius: 50%;
+}
+.section-heading {
+  font-weight: 500;
+  font-size: 24px;
+  margin: 24px 0;
+}
