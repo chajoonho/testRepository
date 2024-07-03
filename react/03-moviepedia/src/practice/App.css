@@ -1,0 +1,35 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.App .App-nav,
+.App .App-footer {
+  flex: none;
+}
+.App .App-container {
+  flex: none;
+}
+.App-nav {
+  background-color: #fff;
+  border-bottom: 1px solid #e2e2e2;
+}
+.App-nav-container {
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.App-footer-container {
+  margin: auto;
+  font-size: 14px;
+  color: #838383;
+  text-align: right;
+  padding: 30px 21px;
+  letter-spacing: -0.25px;
+}
+
+.App-footer {
+  background-color: black;
+}
