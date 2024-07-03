@@ -1,14 +1,28 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 import logoImg from "./assets/logo.png";
 import mockItems from "./mock.json";
+import { getDatas } from "./firebase";
 
 function AppsortButton({ children }) {
   return <button className="AppSortButton selected">{children}</button>;
 }
 
-function App(props) {
+function App() {
+  const [items, setItems] = useState([]);
+
+  const handleLoad = async () => {
+    const resultData = await getDatas("movie");
+    console.log(resultData);
+    setItems(resultData);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
   return (
     <div className="App">
       <nav className="App-nav">
@@ -29,7 +43,7 @@ function App(props) {
           <AppsortButton>베스트순</AppsortButton>
         </div>
         <div className="App-ReviewList">
-          <ReviewList items={mockItems} />
+          <ReviewList items={items} />
           <button className="App-load-more-button">더보기</button>
         </div>
       </div>
