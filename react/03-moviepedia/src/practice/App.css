@@ -16,10 +16,16 @@
   border-bottom: 1px solid #e2e2e2;
 }
 .App-nav-container {
-  margin: 30px auto;
   display: flex;
-  align-items: center;
   height: 100%;
+  align-items: center;
+}
+.App-nav-container,
+.App-container,
+.App-footer-container {
+  width: 100%;
+  max-width: 860px;
+  margin: auto;
 }
 .App-footer-container {
   margin: auto;
