@@ -14,6 +14,13 @@ import {
   limit,
   startAfter,
 } from "firebase/firestore";
+import {
+  deleteObject,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgw5eq2sdToTo3CyMP8sqQJK6QL7THq7g",
@@ -79,27 +86,74 @@ async function getDatasByOrder(collectionName, options) {
 
 async function addDatas(collectionName, dataObj) {
   try {
-    // 문서 ID 수동
-    // const saveDoc = await doc(db, collectionName, '3');
-    // console.log(`doc() 결과: ${saveDoc}`);
-    // const saveResult = await setDoc(saveDoc, dataObj);
-    // console.log(`setDoc() 결과: ${saveResult}`);
+    const uuid = crypto.randomUUID();
+    const path = `movie/${uuid}`;
+    const url = await uploadImage(path, dataObj.imgUrl);
+
+    dataObj.imgUrl = url;
+    // createdAt, updatedAt ==> 현재 날짜 밀리세컨즈로 바꿔서
+    const time = new Date().getTime();
+    dataObj.createdAt = time;
+    dataObj.updatedAt = time;
+
+    // id 필드의 값 ==> 가장 큰 id + 1
+    const lastId = await getLastNum(collectionName, "id");
+    dataObj.id = lastId + 1;
 
     // 문서 ID 자동
     const collect = await collection(db, collectionName);
-    await addDoc(collect, dataObj); // 결과 == undefined
+    const result = await addDoc(collect, dataObj);
+    const docSnap = await getDoc(result); // result => documentReference
+
+    const resultData = { ...docSnap.data(), docId: docSnap.id };
+
+    return resultData;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function getLastNum(collectionName, field) {
+  const q = query(
+    collection(db, collectionName),
+    orderBy(field, "desc"),
+    limit(1)
+  );
+  const lastDoc = await getDocs(q);
+  const lastNum = lastDoc.docs[0].data()[field];
+  return lastNum;
+}
+
+async function uploadImage(path, imgFile) {
+  // 수토리지 객체 가져오기
+  const storage = getStorage();
+  // 저정할 이미지 객체 생성
+  const imageRef = ref(storage, path);
+  // File 객체를 스토리지에 저장
+  await uploadBytes(imageRef, imgFile);
+  // 저장한 File의 url 을 가져오기
+  const url = await getDownloadURL(imageRef);
+  return url;
+}
+
+async function deleteDatas(collectionName, docId, imgUrl) {
+  // 1. 스토리지 객체 가져온다.
+  const storage = getStorage();
+
+  try {
+    // 2. 스토리지에서 이미지 삭제
+    const deleteRef = ref(storage, imgUrl);
+    await deleteObject(deleteRef);
+    // 3. 컬렉션에서 문서 삭제
+    const docRef = await doc(db, collectionName, docId);
+    await deleteDoc(docRef);
     return true;
   } catch (error) {
     return false;
   }
 }
 
-async function deleteDatas(collectionName, docId) {
-  const docRef = await doc(db, collectionName, docId);
-  await deleteDoc(docRef);
-}
-
-async function updateDatas(collectionName, docId, updateDoc) {
+async function updateDatas(collectionName, docId, updateInfoObj) {
   // doc(db, 컬렉션명, 문서ID);
   // getDocs(문서레퍼런스);
   // updateDoc(문서데이터, 수정할정보);
