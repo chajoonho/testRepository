@@ -46,6 +46,19 @@ async function getDatas(collectionName) {
   return resultData;
 }
 
+async function getDatasByOrder(collectionName, options) {
+  const collect = await collection(db, collectionName);
+  // const q = query(컬렉션정보, 조건1, 조건2, 조건3...);
+  const q = query(collect, orderBy(options.order, "desc"));
+  const snapshot = await getDocs(q);
+  const resultData = snapshot.docs.map((doc) => ({
+    docId: doc.id,
+    ...doc.data(),
+  }));
+
+  return resultData;
+}
+
 async function getDatasByOrderLimit(collectionName, options) {
   const collect = await collection(db, collectionName);
   let q;
@@ -59,8 +72,6 @@ async function getDatasByOrderLimit(collectionName, options) {
   } else {
     q = query(collect, orderBy(options.order, "desc"), limit(options.limit));
   }
-  // const q = query(컬렉션정보, 조건1, 조건2, 조건3...)
-
   const snapshot = await getDocs(q);
   const lastQuery = snapshot.docs[snapshot.docs.length - 1];
   console.log(lastQuery);
@@ -70,18 +81,6 @@ async function getDatasByOrderLimit(collectionName, options) {
   }));
 
   return { resultData, lastQuery };
-}
-async function getDatasByOrder(collectionName, options) {
-  const collect = await collection(db, collectionName);
-  // const q = query(컬렉션정보, 조건1, 조건2, 조건3...)
-  const q = query(collect, orderBy(options.order, "desc"));
-  const snapshot = await getDocs(q);
-  const resultData = snapshot.docs.map((doc) => ({
-    docId: doc.id,
-    ...doc.data(),
-  }));
-
-  return resultData;
 }
 
 async function addDatas(collectionName, dataObj) {
@@ -103,7 +102,7 @@ async function addDatas(collectionName, dataObj) {
     // 문서 ID 자동
     const collect = await collection(db, collectionName);
     const result = await addDoc(collect, dataObj);
-    const docSnap = await getDoc(result); // result => documentReference
+    const docSnap = await getDoc(result); // result == > documentReference
 
     const resultData = { ...docSnap.data(), docId: docSnap.id };
 
@@ -125,13 +124,13 @@ async function getLastNum(collectionName, field) {
 }
 
 async function uploadImage(path, imgFile) {
-  // 수토리지 객체 가져오기
+  // 스토리지 객체 가져오기
   const storage = getStorage();
-  // 저정할 이미지 객체 생성
+  // 저장할 이미지 객체 생성
   const imageRef = ref(storage, path);
   // File 객체를 스토리지에 저장
   await uploadBytes(imageRef, imgFile);
-  // 저장한 File의 url 을 가져오기
+  // 저장한 File의 url 가져오기
   const url = await getDownloadURL(imageRef);
   return url;
 }
@@ -153,13 +152,36 @@ async function deleteDatas(collectionName, docId, imgUrl) {
   }
 }
 
-async function updateDatas(collectionName, docId, updateInfoObj) {
-  // doc(db, 컬렉션명, 문서ID);
-  // getDocs(문서레퍼런스);
-  // updateDoc(문서데이터, 수정할정보);
+async function updateDatas(collectionName, dataObj, docId) {
+  // console.log(imgUrl);
+  console.log(dataObj.imgUrl);
   const docRef = await doc(db, collectionName, docId);
-  const docData = await getDocs(docRef);
-  // await updateDoc(docData, updateInfoObj);
+  // 수정할 데이터 양식 생성 =>  title, content, rating, updatedAt, imgUrl
+  const time = new Date().getTime();
+  dataObj.updatedAt = time;
+  // 사진 파일이 수정되면 => 기존 사진 삭제 => 새로운 사진 추가 => url 받아와서 imgUrl 값 세팅
+  if (dataObj.imgUrl !== null) {
+    // 기존사진 url 가져오기
+    const docSnap = await getDoc(docRef);
+    const prevImgUrl = docSnap.data().imgUrl;
+    // 스토리지에서 기존사진 삭제
+    const storage = getStorage();
+    const deleteRef = ref(storage, prevImgUrl);
+    await deleteObject(deleteRef);
+    // 새로운사진 추가
+    const uuid = crypto.randomUUID();
+    const path = `movie/${uuid}`;
+    const url = await uploadImage(path, dataObj.imgUrl);
+    dataObj.imgUrl = url;
+  } else {
+    // imgUrl 프로퍼티 삭제
+    delete dataObj["imgUrl"];
+  }
+  // 사진 파일이 수정되지 않으면 => 변경데이터만 업데이트
+  await updateDoc(docRef, dataObj);
+  const updatedData = await getDoc(docRef);
+  const resultData = { docId: updatedData.id, ...updatedData.data() };
+  return resultData;
 }
 
 export {
@@ -167,6 +189,7 @@ export {
   getDatas,
   addDatas,
   deleteDatas,
+  updateDatas,
   getDatasByOrder,
   getDatasByOrderLimit,
 };

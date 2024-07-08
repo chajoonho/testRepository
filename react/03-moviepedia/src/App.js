@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import "./App.css";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
@@ -11,11 +11,14 @@ import {
   getDatas,
   getDatasByOrder,
   getDatasByOrderLimit,
+  updateDatas,
 } from "./firebase";
+import LocaleSelect from "./LocaleSelect";
+import useTranslate from "./hooks/useTranslate";
 
 const LIMIT = 10;
 
-function AppsortButton({ children, onClick, selected }) {
+function AppSortButton({ children, onClick, selected }) {
   let isSelected = "";
   if (selected) {
     isSelected = "selected";
@@ -32,13 +35,13 @@ function App() {
   const [order, setOrder] = useState("createdAt");
   const [lq, setLq] = useState();
   const [hasNext, setHasNext] = useState(true);
+  const t = useTranslate();
 
   const handleLoad = async (options) => {
     const { resultData, lastQuery } = await getDatasByOrderLimit(
       "movie",
       options
     );
-
     if (!options.lq) {
       setItems(resultData);
     } else {
@@ -60,18 +63,32 @@ function App() {
     setItems((prevItems) => [data, ...prevItems]);
   };
 
+  const handleUpdateSuccess = (result) => {
+    console.log(result);
+    // 화면처리.. 기존데이터는 items 에서 삭제, 수정된 데이터는 items 의 기존 위치에 추가
+    setItems((prevItems) => {
+      const splitIdx = prevItems.findIndex((item) => item.id === result.id);
+
+      return [
+        ...prevItems.slice(0, splitIdx),
+        result,
+        ...prevItems.slice(splitIdx + 1),
+      ];
+    });
+  };
+
   const handleDelete = async (docId, imgUrl) => {
-    // 1. 파이어베이스에 접근해서 imgUrl을 사용해 스토리지에 있는 사진파일 삭제
-    // 2. docId를 사용해 문서 삭제
+    // 1. 파이어베이스에 접근해서 imgUrl 을 사용해 스토리지에 있는 사진파일 삭제
+    // 2. docId 를 사용해 문서 삭제
     const result = await deleteDatas("movie", docId, imgUrl);
-    // db에서 삭제를 성공했을 때만 그 결과를 화면에 반영한다.
+    // db에서 삭제를 성공햇을 때만 그 결과를 화면에 반영한다.
     if (!result) {
       alert("저장된 이미지 파일이 없습니다. \n관리자에게 문의하세요.");
       return false;
     }
-    // 3. items에서 docId가 같은 요소(객체)를 찾아서 제거
+    // 3. items 에서 docId 가 같은 요소(객체)를 찾아서 제거
     // setItems((prevItems) => {
-    //   const filterdArr = prevItems.filter(item => {
+    //   const filteredArr = prevItems.filter(item => {
     //     return item.docId !== docId;
     //   })
     //   return filteredArr;
@@ -89,48 +106,51 @@ function App() {
       <nav className="App-nav">
         <div className="App-nav-container">
           <img className="App-logo" src={logoImg} />
-          <select>
-            <option>한국어</option>
-            <option>English</option>
-          </select>
+          <LocaleSelect />
         </div>
       </nav>
       <div className="App-container">
         <div className="App-ReviewForm">
-          <ReviewForm addData={addDatas} handleAddSuccess={handleAddSuccess} />
+          <ReviewForm
+            onSubmit={addDatas}
+            handleSubmitSuccess={handleAddSuccess}
+          />
         </div>
         <div className="App-sorts">
-          <AppsortButton
+          <AppSortButton
             selected={order === "createdAt"}
             onClick={handleNewestClick}
           >
-            최신순
-          </AppsortButton>
-          <AppsortButton
+            {t("newest")}
+          </AppSortButton>
+          <AppSortButton
             selected={order === "rating"}
             onClick={handleBestClick}
           >
-            베스트순
-          </AppsortButton>
+            {t("best")}
+          </AppSortButton>
         </div>
         <div className="App-ReviewList">
-          <ReviewList items={items} handleDelete={handleDelete} />
-          {/* {hasNext && (
-            <button className="App-load-more-button" onClick={handleMoreClick}>
-              더보기
-            </button>
-          )} */}
+          <ReviewList
+            items={items}
+            handleDelete={handleDelete}
+            onUpdate={updateDatas}
+            onUpdateSuccess={handleUpdateSuccess}
+          />
+          {/* {hasNext && (<button className='App-load-more-button' onClick={handleMoreClick}>
+            더보기
+          </button>)} */}
           <button
             className="App-load-more-button"
             onClick={handleMoreClick}
             disabled={!hasNext}
           >
-            더보기
+            {t("load more")}
           </button>
         </div>
       </div>
       <footer className="App-footer">
-        <div className="App-footer-container">| 개인정보 처리방침</div>
+        <div className="App-footer-container">{t("privary policy")}</div>
       </footer>
     </div>
   );
