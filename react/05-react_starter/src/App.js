@@ -1,41 +1,42 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Cleanup from "./Cleanup";
+import ToDoList from "./ToDoList";
+import MovieApp from "./MovieApp";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [push, setPush] = useState();
-  // console.log("App 컴포넌트 랜더링..");
-  const Click = () => {
+  const [inputValue, setInputValue] = useState("");
+  // console.log("App 컴포넌트 렌더링..");
+  const handleClick = () => {
     setCount(count + 1);
   };
-  const handlePushChange = (e) => {
-    setPush(e.target.value);
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
   };
   useEffect(() => {
     console.log("나는 화면이 최초 렌더링될 때 실행되는 uef야.");
   }, []); // [](디펜던시 리스트) 안에는 react 가 무엇을 지켜볼 지 작성해준다.
   useEffect(() => {
-    console.log("나는 count가 변결될때 실행되는 uef야.");
+    console.log("나는 count가 변경될 때 실행되는 uef야.");
   }, [count]);
   useEffect(() => {
-    console.log("나는 inputValue가 변결될때 실행되는 uef야.");
-  }, [push]);
-
-  // useEffect(() => {
-  //   console.log("나는 count가 변결될때 실행되는 uef야.");
-  // }, [count, push]);
+    console.log("나는 inputValue가 변경될 때 실행되는 uef야.");
+  }, [inputValue]);
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search here"
-        onChange={handlePushChange}
-      />
-      <h2>입력한 값 : {push}</h2>
+    <>
+      {/* <input type="text" placeholder="Search here" onChange={handleChange} />
+      <h2>입력한 값 : {inputValue}</h2>
       <h1>{count}</h1>
-      <button onClick={Click}>Click me</button>
-    </div>
+      <button onClick={handleClick}>Click me</button>
+      <hr />
+      <Cleanup />
+      <hr />
+      <ToDoList />
+      <hr /> */}
+      <MovieApp />
+    </>
   );
 }
 
