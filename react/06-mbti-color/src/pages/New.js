@@ -3,12 +3,19 @@ import styles from "./New.module.css";
 import { Link } from "react-router-dom";
 import MBTISelect from "../components/MBTISelect";
 import ColorInput from "../components/ColorInput";
+import generateColorCode from "../lib/generateColorCode";
+import { addDatas } from "../lib/firebase";
 
 function New(props) {
+  const INITAIL_VALUES = {
+    mbti: "",
+    colorCode: "",
+  };
   const [formValue, setFormValue] = useState({
-    mbti: "ESTP",
-    colorCode: "#f2f2f2",
+    mbti: "",
+    colorCode: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name, value) => {
     setFormValue((prevFormValue) => {
@@ -16,12 +23,38 @@ function New(props) {
     });
   };
 
+  const handleRandomClick = () => {
+    const nextColorCode = generateColorCode();
+    handleChange("colorCode", nextColorCode);
+  };
+
+  const handleSave = async () => {
+    const { mbti, colorCode } = formValue;
+    if (mbti.length < 4) {
+      alert("mbti 를 선택해주세요.");
+      return false;
+    }
+    if (colorCode == "") {
+      alert("컬러 코드를 입력해주세요.");
+      return false;
+    }
+    setIsSubmitting(true);
+    const result = await addDatas("mbtiColor", formValue);
+    if (result) {
+      alert("MBTI Color 등록을 성공했습니다.");
+      setFormValue(INITAIL_VALUES);
+    } else {
+      alert("MBTI Color 등록을 실패했습니다. \n관리자에게 문의하세요.");
+    }
+    setIsSubmitting(false);
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.headerHeading}>새 컬러 등록하기</h1>
         <Link className={styles.cancel} to="/">
-          <img className={styles.cancelIcon} src="/images/X.svg" />
+          <img className={styles.cancelIcon} src="/images/x.svg" />
         </Link>
       </header>
       <section className={styles.section}>
@@ -34,13 +67,24 @@ function New(props) {
       <section className={styles.section}>
         <h2 className={styles.sectionHeading}>
           컬러
-          <button className={styles.random}>
+          <button className={styles.random} onClick={handleRandomClick}>
             <img className={styles.repeatIcon} src="/images/repeat.svg" />
           </button>
         </h2>
-        <ColorInput />
+        <ColorInput
+          colorCodeValue={formValue.colorCode}
+          handleChange={(newColorCode) =>
+            handleChange("colorCode", newColorCode)
+          }
+        />
       </section>
-      <button className={styles.submit}>컬러 등록</button>
+      <button
+        className={styles.submit}
+        onClick={handleSave}
+        disabled={isSubmitting}
+      >
+        컬러 등록
+      </button>
     </div>
   );
 }
