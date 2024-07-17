@@ -10,7 +10,7 @@ function HomePage(props) {
       <Container className={styles.container}>
         <div className={styles.texts}>
           <h1 className={styles.heading}>
-            <span> 코딩이 처음이라면,</span>
+            <span>코딩이 처음이라면,</span>
             <br />
             <strong>DWOS</strong>
           </h1>
