@@ -10,7 +10,7 @@ ul.items {
   min-width: 260px;
   padding: 0;
   margin: 0 auto;
-  list-style-type: none;
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -20,13 +20,12 @@ ul.items {
 }
 .delete {
   position: absolute;
-  right: 2%;
   top: 20px;
+  right: 2%;
   cursor: pointer;
   display: none;
 }
 .item:hover .delete {
-  visibility: visible;
   display: block;
 }
 .emptyList {

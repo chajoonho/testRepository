@@ -12,10 +12,8 @@ function WishListPage(props) {
   // courseList state 가 필요함
   const [courseList, setCourseList] = useState([]);
   const member = JSON.parse(localStorage.getItem("member"));
-  const [isLoading, setIsLoading] = useState(true);
 
   const handleLoad = async () => {
-    setIsLoading(true);
     // handleLoad 함수에서 로그인 사용자의 email 로 member 문서 가져오고
     // 문서안에 있는 courseList 를 state 에 set 해준다.
     const result = await getData("member", {
@@ -24,7 +22,6 @@ function WishListPage(props) {
       value: member.email,
     });
     setCourseList(result.courseList);
-    setIsLoading(false);
   };
 
   const handleDelete = async (course) => {
@@ -43,7 +40,7 @@ function WishListPage(props) {
   return (
     <Container className={styles.container}>
       <h1 className={styles.title}>나의 위시리스트</h1>
-      {courseList.length === 0 && !isLoading ? (
+      {courseList.length === 0 ? (
         <>
           <Warn
             className={styles.emptyList}

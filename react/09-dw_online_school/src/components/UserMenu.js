@@ -32,7 +32,6 @@ function UserMenu(props) {
           {!isLogined ? (
             <>
               <li className={styles.disabled}>위시리스트</li>
-
               <Link to="/login">
                 <li>로그인</li>
               </Link>

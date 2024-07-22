@@ -24,7 +24,7 @@
 
 :root {
   --gmarket-sans: "Gmarket Sans";
-  --noto-sans: -apple-system, "Noto Sans KR", snas-serif;
+  --noto-sans: -apple-system, "Noto Sans KR", sans-serif;
 }
 
 html {

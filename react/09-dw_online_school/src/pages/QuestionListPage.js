@@ -1,24 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListPage from "../components/ListPage";
 import styles from "./QuestionListPage.module.css";
-import Input from "../components/Input";
 import searchImg from "../assets/search.svg";
+import QuestionItem from "../components/QuestionItem";
+import { getDatas } from "../api/firebase";
 
-// const [items, setItems] = useState();
+let listItems;
+
 function QuestionListPage(props) {
+  const [items, setItems] = useState([]);
+
+  const handleLoad = async () => {
+    const resultData = await getDatas("questions");
+    listItems = resultData; // 검색용으로 사용할 전체 데이터를 가지고 있어야 한다.
+    setItems(resultData);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
   return (
     <ListPage variant="community">
-      <div className={styles.container}>
-        <Input placeholder="검색으로 질문 찾기" />
-        {/* <p className={styles.count}>총 {items.length}개 코스</p> */}
+      <form className={styles.form}>
+        <input placeholder="검색으로 코스 찾기" />
         <button>
           <img src={searchImg} />
         </button>
-      </div>
-      <div className={styles.box}>
-        <Input />
-        <Input />
-        <Input />
+      </form>
+
+      <p className={styles.count}>총 {0}개 코스</p>
+
+      <div className={styles.questionList}>
+        {items.map((question) => (
+          <QuestionItem key={question.docId} question={question} />
+        ))}
       </div>
     </ListPage>
   );
