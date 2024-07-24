@@ -32,7 +32,7 @@ function FoodForm(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const resultData = await addDatas("foodlist", values);
+    const resultData = await addDatas("food", values);
   };
   return (
     <form className="FoodForm" onSubmit={handleSubmit}>
