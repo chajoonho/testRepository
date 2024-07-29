@@ -56,8 +56,10 @@ function FoodList({ items, onDelete, onUpdate, onUpdateSuccess }) {
           const initialValues = { title, calorie, content, imgUrl: null };
 
           const handleSubmit = (collectionName, updateObj) => {
-            onUpdate(collectionName, docId, updateObj);
+            const result = onUpdate(collectionName, docId, updateObj, imgUrl);
+            return result;
           };
+
           const handleSubmitSuccess = (result) => {
             onUpdateSuccess(result);
             // 수정 폼을 리스트로 변경
