@@ -37,21 +37,35 @@ function DiaryList({ diaryList }) {
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
 
-  const getSortedDiaryList = (e) => {
-    setFilter(e.target.value);
-    console.log(setFilter);
+  const getSortedDiaryList = () => {
     // 필터링 함수
-    const getFilteredList = () => {
-      // filter state가 good 이면(emotion의 값이 3보다 작거나 같을 때)
-      // filter state가 good 이 아니면(emotion의 값이 3보다 클 때)
+    const getFilteredList = (diary) => {
+      if (filter === "good") {
+        // filter state가 good 이면(emotion의 값이 3보다 작거나 같을 때)
+        return diary.emotion <= 3;
+      } else {
+        // filter state가 good 이 아니면(emotion의 값이 3보다 클 때)
+        return diary.emotion > 3;
+      }
     };
-    getSortedDiaryList(getFilteredList);
     // [1, 11, 21].sort((a,b) => b - a);
     // 정렬 함수
-    const getOrderedList = () => {
-      // order state가 latest 이면 b - a
-      // order state가 latest 가 아니면 a - b
+    const getOrderedList = (a, b) => {
+      if (order === "latest") {
+        // order state가 latest 이면 b - a
+        return b.date - a.date;
+      } else {
+        // order state가 latest 가 아니면 a - b
+        return a.date - b.date;
+      }
     };
+    const filteredList =
+      filter === "all"
+        ? diaryList
+        : diaryList.filter((diary) => getFilteredList(diary));
+
+    const sortedList = filteredList.sort(getOrderedList);
+    return sortedList;
   };
 
   return (
@@ -77,7 +91,7 @@ function DiaryList({ diaryList }) {
           />
         </div>
       </div>
-      {diaryList.map((diary) => {
+      {getSortedDiaryList().map((diary) => {
         return <DiaryItem key={diary.id} {...diary} />;
       })}
     </div>

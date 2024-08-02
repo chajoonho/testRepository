@@ -19,7 +19,7 @@ function HomePage(props) {
   useEffect(() => {
     // 1. curDate 를 활용하여 firstDay 와 lastDay 를 만들어준다.
     // new Date(2024, 8, 1, 시, 분, 초);
-    // 2. firstDay 와 lastDay 를 밀리세컨즈 형태로 변환
+    // 2. firstDay와 lastDay를 밀리세컨즈 형태로 변환.
     const firstDay = new Date(
       curDate.getFullYear(),
       curDate.getMonth()
@@ -32,9 +32,6 @@ function HomePage(props) {
       59,
       59
     ).getTime();
-    console.log(firstDay);
-    console.log(lastDay);
-
     // 3. diaryList 에서 date 필드가 firstDay 와 lastDay 사이에 있는 원소들만 뽑아서
     // 새로운 배열을 만든다.
     const newItem = diaryList.filter(
@@ -42,7 +39,7 @@ function HomePage(props) {
     );
     // 4. setSortedItem 함수 사용
     setSortedItem(newItem);
-  }, [curDate]);
+  }, [curDate, diaryList]);
   return (
     <div>
       <Header
