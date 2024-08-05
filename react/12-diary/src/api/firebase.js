@@ -14,6 +14,7 @@ import {
   getDocs,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -24,7 +25,6 @@ const firebaseConfig = {
   messagingSenderId: "304361568142",
   appId: "1:304361568142:web:81a72ef3e0947ff2f716df",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -34,7 +34,7 @@ function getCollection(collectionName) {
   return collection(db, collectionName);
 }
 
-function getUserAuth() {
+export function getUserAuth() {
   return auth;
 }
 
@@ -113,5 +113,15 @@ export async function updateDatas(collectionName, docId, updateObj) {
     return resultData;
   } catch (error) {
     console.log("Error Update: ", error);
+  }
+}
+
+export async function deleteDatas(collectionName, docId) {
+  try {
+    const docRef = doc(db, collectionName, docId);
+    await deleteDoc(docRef);
+    return true;
+  } catch (error) {
+    console.log("Error Delete: ", error);
   }
 }
