@@ -16,9 +16,9 @@ function Checkout() {
       <div>
         <p>
           <span>합계: $ {totalPrice.toFixed(2)}</span>
-          <button className={styles.checkout_button}>계산하기</button>
-          <Link className={styles.checkout_button}></Link>
         </p>
+        {/* <button className={styles.checkout_button}>계산하기</button> */}
+        <Link className={styles.checkout_button}>로그인</Link>
       </div>
     </div>
   );
