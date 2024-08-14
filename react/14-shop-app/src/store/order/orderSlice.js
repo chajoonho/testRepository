@@ -16,13 +16,13 @@ const orderSlice = createSlice({
       .addCase(fetchOrder.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(fetchOrder.pending, (state, action) => {
+      .addCase(fetchOrder.fulfilled, (state, action) => {
         state.isLoading = false;
         state.order = action.payload;
       })
-      .addCase(fetchOrder.pending, (state, action) => {
+      .addCase(fetchOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state, (error = action.payload);
+        state.error = action.payload;
       });
   },
 });
