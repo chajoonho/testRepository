@@ -156,18 +156,18 @@ export async function updateTotalAndQuantity(uid, docId, operator) {
 export async function createOrder(uid, orderObj) {
   try {
     // 1. orders 컬렉션에 데이터 추가
-    // 1.1 orderRef 객체 생성 ("users", uid, "orders")
-    const orderRef = getCollection("users", uid, "orders");
-    // 1.2 생성할 객체를 만들어준다.
-    //     createObj = {cancelYn, createdAt, updatedAt, 기존 oderObj 프로퍼티들..}
+    //    1.1 orderRef 객체 생성 ("users", uid, "orders")
+    const ordersRef = getCollection("users", uid, "orders");
+    //    1.2 생성할 객체를 만들어준다.
+    //        createObj = {cancelYn, createdAt, updatedAt, 기존 orderObj 프로퍼티들...}
     const createObj = {
       cancelYn: "N",
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime(),
       ...orderObj,
     };
-    // 1.3 await addDoc
-    const docRef = await addDoc(orderRef, createObj);
+    //    1.3 await addDoc
+    const docRef = await addDoc(ordersRef, createObj);
     // 2. cart 문서 삭제
     //    2.1 batch 객체를 생성. writeBatch(db)
     const batch = writeBatch(db);
@@ -178,12 +178,11 @@ export async function createOrder(uid, orderObj) {
       const itemRef = doc(cartRef, product.id.toString());
       batch.delete(itemRef);
     });
-    //    2.4 await batch.commint();
+    //    2.4 await batch.commit();
     await batch.commit();
     return docRef.id;
-    // return true;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
